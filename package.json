@@ -1,14 +1,16 @@
 {
-  "name": "bedwars-stats-predictor",
+  "name": "emberlite",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.3",
-    "node-fetch": "^3.3.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "cors": "^2.8.5"
+    "express": "^4.17.3",
+    "node-fetch": "^2.7.0",
+    "sqlite3": "^5.1.2"
   }
 }

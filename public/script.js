@@ -1,4 +1,4 @@
-async function getStats() {
+document.getElementById('fetchStats').addEventListener('click', async () => {
     const playerName = document.getElementById('playerName').value;
     const response = await fetch(`/api/stats/${playerName}`);
     const data = await response.json();
@@ -12,6 +12,4 @@ async function getStats() {
             <p>Games to Next Prestige: ${analysis.gamesToNextPrestige}</p>
         `;
     }
-}
-
-document.getElementById('fetchStats').addEventListener('click', getStats);
+});
