@@ -1,19 +1,25 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const fetch = require('node-fetch');
-const { calculateFKDR, estimateNextPrestige } = require('./utils');
-const { initDatabase, savePlayerStats, getPlayerStats } = require('./db');
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+import { calculateFKDR, estimateNextPrestige } from './utils.js';
+import { initDatabase, savePlayerStats, getPlayerStats } from './db.js';
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 4000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Serve frontend files
+app.use(express.static('public'));
+
+initDatabase();
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
+
 
 // Initialize the database
 initDatabase();

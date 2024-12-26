@@ -1,8 +1,8 @@
-const sqlite3 = require('sqlite3').verbose();
+import sqlite3 from 'sqlite3';
 
 const db = new sqlite3.Database('./bedwars.db');
 
-function initDatabase() {
+export function initDatabase() {
     db.run(`
         CREATE TABLE IF NOT EXISTS player_stats (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,14 +14,14 @@ function initDatabase() {
     `);
 }
 
-function savePlayerStats(playerName, stats, analysis) {
+export function savePlayerStats(playerName, stats, analysis) {
     db.run(
         `INSERT INTO player_stats (player_name, stats, analysis) VALUES (?, ?, ?)`,
         [playerName, JSON.stringify(stats), JSON.stringify(analysis)]
     );
 }
 
-function getPlayerStats(playerName) {
+export function getPlayerStats(playerName) {
     return new Promise((resolve, reject) => {
         db.all(
             `SELECT * FROM player_stats WHERE player_name = ? ORDER BY timestamp DESC`,
@@ -33,5 +33,3 @@ function getPlayerStats(playerName) {
         );
     });
 }
-
-module.exports = { initDatabase, savePlayerStats, getPlayerStats };
